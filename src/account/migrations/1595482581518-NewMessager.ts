@@ -21,12 +21,10 @@ export class NewMessager1595482581518 implements MigrationInterface {
           {
             name: 'photo',
             type: 'varchar',
-            isUnique: true,
           },
           {
             name: 'name',
             type: 'varchar',
-            isUnique: true,
           },
           {
             name: 'createdAt',
