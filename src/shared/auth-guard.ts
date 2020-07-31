@@ -10,9 +10,6 @@ import * as jwt from 'jsonwebtoken';
 import * as config from 'config';
 
 const jwtConfig = config.get('jwt');
-const Secret ={
-  JWT:"secret",
-};
 
 require('dotenv').config();
 
@@ -40,7 +37,7 @@ export class AuthGuard implements CanActivate {
     try {
       const decoded: any = await jwt.verify(
         token,
-        Secret.JWT || jwtConfig.secret,
+        process.env.JWT || jwtConfig.secret,
       );
       console.log(decoded);
 
