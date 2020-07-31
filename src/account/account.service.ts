@@ -23,6 +23,8 @@ export class AccountService {
     });
     if (checkaccount) {
       Logger.log('OLD');
+      checkaccount.name = "Hey"
+      await this.accountRepository.save(checkaccount);
       return checkaccount;
     } else {
       Logger.log('NEW');
