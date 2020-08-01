@@ -18,6 +18,10 @@ export class NewMessage1595432201692 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'photo',
+            type: 'varchar',
+          },
+          {
             name: 'author',
             type: 'varchar',
           },
