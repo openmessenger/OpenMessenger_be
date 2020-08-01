@@ -91,18 +91,21 @@ export class MessageRepository extends Repository<messages> {
     email: string,
     accounts: AccountRepository,
   ) => {
-    const { msg, receiver } = newMsg;
+    const { msg, photo, receiver } = newMsg;
+    console.log(msg, photo, receiver);
     const message = new messages();
     let result;
     try {
       message.msg = msg;
       message.author = email;
+      message.photo = photo;
       const [res, count] = await accounts.findAndCount({
         id: Number(receiver),
       });
       message.receiver = res[0].email;
       await message.save().then(res => {
         result = res;
+        console.log(result);
       });
       return {
         status: 201,

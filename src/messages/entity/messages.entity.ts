@@ -17,6 +17,9 @@ export class messages extends BaseEntity {
   msg: string;
 
   @Column()
+  photo: string;
+
+  @Column()
   author: string;
 
   @Column()
