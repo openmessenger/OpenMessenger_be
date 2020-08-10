@@ -24,6 +24,9 @@ export class messagers extends BaseEntity {
   @Column()
   photo: string;
 
+  @Column({ type: 'varchar', array: true, nullable: true })
+  blocklist: string[];
+
   @CreateDateColumn()
   createdAt: Date;
 

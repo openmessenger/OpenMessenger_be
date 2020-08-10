@@ -1,7 +1,6 @@
 import { EntityRepository, Repository, getRepository } from 'typeorm';
 import { messagers } from './entity/messager.entity';
 import { SearchUser } from './dto/SearchUser.dto';
-import { Logger } from '@nestjs/common';
 
 @EntityRepository(messagers)
 export class AccountSearchRepository extends Repository<messagers> {

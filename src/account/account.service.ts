@@ -34,7 +34,6 @@ export class AccountService {
   }
   async getUser(req: any): Promise<any> {
     const User = this.validateAccount(req.user);
-
     if (req.user.type === 'messager') {
       const usernew = {
         name: req.user.name,
@@ -64,5 +63,40 @@ export class AccountService {
   async SearchUser(req: any, data: SearchUser): Promise<any> {
     const email = req.user.email;
     return this.accountsearchRepo.SearchUser(email, data);
+  }
+
+  async blockUser(req: any, data: SearchUser): Promise<any> {
+    const { chat_to } = data;
+    const checkaccount = await this.accountRepository.findOne({
+      email: req.user.email,
+    });
+
+    if (checkaccount) {
+      let blockList = checkaccount.blocklist;
+      let NewblockList = [];
+      let Status;
+      if (blockList != undefined) {
+        let i = 0;
+        let Find = false;
+        for (i = 0; i < blockList.length; i++) {
+          if (Number(chat_to) !== Number(blockList[i])) {
+            NewblockList = NewblockList.concat(blockList[i]);
+          } else {
+            Find = true;
+            Status = 'UNBLOCKED';
+          }
+        }
+        if (!Find) {
+          NewblockList = NewblockList.concat(chat_to);
+          Status = 'BLOCKED';
+        }
+      } else {
+        NewblockList = NewblockList.concat(chat_to);
+        Status = 'BLOCKED';
+      }
+      checkaccount.blocklist = NewblockList;
+      await this.accountRepository.save(checkaccount);
+      return { Status: Status };
+    }
   }
 }

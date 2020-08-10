@@ -33,6 +33,11 @@ export class NewMessager1595482581518 implements MigrationInterface {
             isNullable: false,
           },
           {
+            name: 'blocklist',
+            type: 'varchar[]',
+            isNullable: true,
+          },
+          {
             name: 'updatedAt',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',

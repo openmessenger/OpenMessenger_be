@@ -22,6 +22,7 @@ export class MessageService {
     const senderMail = data.receiver;
     return this.messageRepository.getMessages(
       req.user.email,
+      req.user.id,
       senderMail,
       this.account,
     );
