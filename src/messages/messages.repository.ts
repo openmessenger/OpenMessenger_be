@@ -8,6 +8,7 @@ import { AccountRepository } from '../account/account.repository';
 export class MessageRepository extends Repository<messages> {
   getMessages = async (
     UserMail: string,
+    userId: string,
     ReceiverMail: string,
     accounts: AccountRepository,
   ) => {
@@ -15,6 +16,31 @@ export class MessageRepository extends Repository<messages> {
       const [resp, count] = await accounts.findAndCount({
         id: Number(ReceiverMail),
       });
+      const [resp2, count2] = await accounts.findAndCount({
+        email: UserMail,
+      });
+      const block = {
+        BlockedMe: false,
+        BlockedbyMe: false,
+      };
+      const Block1 = resp[0].blocklist;
+      const Block2 = resp2[0].blocklist;
+
+      if (Block1 !== null) {
+        for (let i = 0; i < Block1.length; i++) {
+          if (Number(Block1[i]) === Number(resp2[0].id)) {
+            block.BlockedMe = true;
+            break;
+          }
+        }
+      }
+      if (Block2 !== null) {
+        for (let i = 0; i < Block2.length; i++) {
+          if (Number(Block2[i]) === Number(resp[0].id)) {
+            block.BlockedbyMe = true;
+          }
+        }
+      }
       const Messages = await getRepository(messages)
         .createQueryBuilder('message')
         .where(
@@ -27,6 +53,7 @@ export class MessageRepository extends Repository<messages> {
           message: 'Messeage list fetched successfully',
           receiver: resp[0],
           Messages,
+          block,
         };
       }
     } catch (err) {
@@ -92,7 +119,6 @@ export class MessageRepository extends Repository<messages> {
     accounts: AccountRepository,
   ) => {
     const { msg, photo, receiver } = newMsg;
-    console.log(msg, photo, receiver);
     const message = new messages();
     let result;
     try {
@@ -105,7 +131,6 @@ export class MessageRepository extends Repository<messages> {
       message.receiver = res[0].email;
       await message.save().then(res => {
         result = res;
-        console.log(result);
       });
       return {
         status: 201,

@@ -39,4 +39,10 @@ export class AccountController {
   async getuser(@Req() req, @Body() UserSearch: SearchUser): Promise<any> {
     return this.accountService.SearchUser(req, UserSearch);
   }
+
+  @Post('block')
+  @UseGuards(new AuthGuard())
+  async blockUser(@Req() req, @Body() blockId: SearchUser): Promise<any> {
+    return this.accountService.blockUser(req, blockId);
+  }
 }
