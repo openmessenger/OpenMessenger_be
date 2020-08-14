@@ -47,6 +47,13 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Format code
+
+```
+# Format code using prettier
+$ npm run format
+```
+
 ## Test
 
 ```bash
