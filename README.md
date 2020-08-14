@@ -49,7 +49,7 @@ $ npm run start:prod
 
 ## Format code
 
-```
+```bash
 # Format code using prettier
 $ npm run format
 ```
