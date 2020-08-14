@@ -40,7 +40,7 @@ export class AccountService {
         email: req.user.email,
         photo: req.user.photo,
       };
-      this.logger.verbose(`Faculty Logged In ${usernew.name}`);
+      this.logger.verbose(`User Logged In ${usernew.name}`);
       const { ...result } = usernew;
       let finalresult = { ...result, type: 'messager' };
       return {
