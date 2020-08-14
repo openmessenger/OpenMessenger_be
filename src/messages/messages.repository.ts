@@ -95,7 +95,7 @@ export class MessageRepository extends Repository<messages> {
         return false;
       };
       let DataArr = [];
-      for (let i = 0; i < Friends_Array.length; i++) {
+      for (let i = Friends_Array.length - 1; i >= 0; i--) {
         if (false === Duplicate(Friends_Array[i].id)) {
           DataArr = DataArr.concat(Friends_Array[i]);
         }
