@@ -21,8 +21,8 @@ async function bootstrap() {
   global.console.log('environment', process.env.NODE_ENV);
 
   const options = new DocumentBuilder()
-    .setTitle('Simple Messenger')
-    .setDescription('Simple messenger using react and nestjs')
+    .setTitle('Open Messenger')
+    .setDescription('Open source messenger using react and nestjs')
     .setVersion('1.0')
     .setSchemes('http', 'https')
     .addBearerAuth('Authorization', 'header', 'apiKey')
