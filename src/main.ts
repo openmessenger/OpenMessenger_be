@@ -40,7 +40,7 @@ async function bootstrap() {
 
   const port = process.env.PORT || serverConfig.port;
   await app.listen(port);
-  logger.log(`Application Listening on Port ${port} `);
+  logger.log(`Application is running on Port ${port} `);
   logger.log(`Api documentation avaliable at "/doc/`);
 }
 
